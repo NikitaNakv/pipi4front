@@ -39,7 +39,9 @@ class Main extends Component {
     }
 
 
-
+    updateCanvas(canvasR) {
+        Canvas.updateState({canvasR})
+    }
 
     handleOptionChangeForX = changeEvent => {
         this.setState({
@@ -52,6 +54,8 @@ class Main extends Component {
             selectedOptionForR: changeEvent.target.value
         });
         this.updateDynamicResult();
+        this.updateCanvas(changeEvent.target.value);
+
     };
     handleOptionChangeForY = changeEvent => {
         this.setState({
@@ -256,7 +260,10 @@ class Main extends Component {
                                        onChange={this.handleOptionChangeForY}
                                        className="slider" id="myRange"/>
                             </div>
-                            <belle.Button type="submit">Submit</belle.Button>
+                            <textarea id="hiddenX" hidden="hidden" value={this.state.selectedOptionForX}/>
+                            <textarea id="hiddenY" hidden="hidden" value={this.state.selectedOptionForY}/>
+                            <textarea id="hiddenR" hidden="hidden" value={this.state.selectedOptionForR}/>
+                            <belle.Button type="submit" id="submitForm">Submit</belle.Button>
                         </form>
                         <table>
                             <tbody className="Data">
@@ -266,7 +273,7 @@ class Main extends Component {
                                 <td>R</td>
                                 <td>result</td>
                             </tr>
-                            {this.state.data.map((data, i) => <TableRow key={i} data={data} />)}x
+                            {this.state.data.map((data, i) => <TableRow key={i} data={data} />)}
                             </tbody>
                         </table>
                         <BButton/>

@@ -20,10 +20,10 @@ let r = 1;
     yVal = sessionStorage.getItem("yPizda");
     drawPoint("1.5", "1.5", val.value);
 
-    document.getElementById('newXYR:r').value = val.value;
+    document.getElementById('newXYR:canvasR').value = val.value;
 }*/
 
-    drawCanvas('canvas',/*document.getElementById('newXYR:r').value*/1);
+    drawCanvas('canvas',/*document.getElementById('newXYR:canvasR').value*/1);
     /*xVal = sessionStorage.getItem("xPizda");
     yVal = sessionStorage.getItem("yPizda");
     rVal = sessionStorage.getItem("rPizda");
@@ -182,7 +182,7 @@ function clickCanvas(){
         // request.onreadystatechange = function (){
         //     alert("lol");
         // }
-        // request.send("newXYR: newXYR&newXYR:x:=1&newXYR:y:=1&newXYR:r:=2&newXYR:j_idt24:=Check&javax.faces.ViewState:=6185241858636643211:-2645044552540146115");
+        // request.send("newXYR: newXYR&newXYR:x:=1&newXYR:y:=1&newXYR:canvasR:=2&newXYR:j_idt24:=Check&javax.faces.ViewState:=6185241858636643211:-2645044552540146115");
     }
 }
 

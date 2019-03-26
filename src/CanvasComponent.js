@@ -1,20 +1,68 @@
 import React, { Component } from 'react';
 
+
+function updateState(canvasR){
+    this.setState({canvasR})
+    console.log("You have submitted canvasR:", this.state.selectedOptionForR)
+}
+
 class CanvasComponent extends Component {
 
     constructor(props){
         super(props);
         this.state = {
-            r : "1",
+            canvasR : "1",
             width : 300,
             height : 300
-        }
+        };
+        updateState = updateState.bind(this);
     }
+
 
 
     componentDidMount() {
         this.updateCanvas();
     }
+
+    handleClick() {
+        let canvas = document.getElementById('canvas');
+        let br = canvas.getBoundingClientRect();
+        let left = br.left;
+        let top = br.top;
+        let event = window.event;
+        let x = event.clientX-left;
+        let y = event.clientY-top;
+        let size = canvas.height;
+        if (this.state.canvasR>0) {
+            x = Math.round((x - size / 2) * this.state.canvasR * 10 / 2 / 65) / 10;
+            y = Math.round((-y + size / 2) * this.state.canvasR * 10 / 2 / 65) / 10;
+
+            this.drawPoint(x, y, this.state.canvasR);
+
+            document.getElementById('hiddenY').value=y;
+            document.getElementById('hiddenX').value=x;
+
+            document.getElementById("submitForm").click();
+        }
+    }
+
+
+    drawPoint(x,y,r){
+        let color;
+        let canvas = document.getElementById('canvas'),
+            ctx = canvas.getContext("2d");
+        if (this.isInArea(x,y,r)) {
+            color = 'green';
+        } else {
+            color = 'red';
+        }
+        ctx.beginPath();
+        ctx.arc(150+x*130/r,150-y*130/r,2,0,2*Math.PI);
+        ctx.fillStyle = color;
+        ctx.fill();
+        ctx.closePath();
+    }
+
     updateCanvas() {
         const context = this.refs.canvas.getContext('2d');
         context.clearRect(0, 0, this.width, this.height);
@@ -89,16 +137,16 @@ class CanvasComponent extends Component {
         context.lineTo(155, 215);
         context.moveTo(145, 280);
         context.lineTo(155, 280);
-        if (this.state.r === 0){
+        if (this.state.canvasR === 0){
             context.fillText("R", 160, 25);
             context.fillText("R/2", 160, 90);
             context.fillText("-R/2", 160, 220);
             context.fillText("-R", 160, 285);
         } else {
-            context.fillText(this.state.r, 160, 25);
-            context.fillText((this.state.r / 2), 160, 90);
-            context.fillText(-(this.state.r / 2), 160, 220);
-            context.fillText(-this.state.r, 160, 285);
+            context.fillText(this.state.canvasR, 160, 25);
+            context.fillText((this.state.canvasR / 2), 160, 90);
+            context.fillText(-(this.state.canvasR / 2), 160, 220);
+            context.fillText(-this.state.canvasR, 160, 285);
         }
 
 //деления Y
@@ -110,16 +158,16 @@ class CanvasComponent extends Component {
         context.lineTo(215, 155);
         context.moveTo(280, 145);
         context.lineTo(280, 155);
-        if (this.state.r===0){
+        if (this.state.canvasR===0){
             context.fillText("-R", 12, 140);
             context.fillText("-R/2", 70, 140);
             context.fillText("R/2", 205, 140);
             context.fillText("R", 275, 140);
         } else {
-            context.fillText(-this.state.r, 12, 140);
-            context.fillText(-(this.state.r / 2), 70, 140);
-            context.fillText((this.state.r / 2), 205, 140);
-            context.fillText(this.state.r, 275, 140);
+            context.fillText(-this.state.canvasR, 12, 140);
+            context.fillText(-(this.state.canvasR / 2), 70, 140);
+            context.fillText((this.state.canvasR / 2), 205, 140);
+            context.fillText(this.state.canvasR, 275, 140);
         }
 
         context.closePath();
@@ -129,8 +177,20 @@ class CanvasComponent extends Component {
     }
     render() {
         return (
-            <canvas ref="canvas" width={300} height={300}/>
+            <canvas ref="canvas" onClick={ this.props.updateParent } width={300} height={300}/>
         );
+    }
+
+
+    isInArea(x, y, r) {
+
+        if((x >= 0 && y >= 0) && (x <= r) && (y <= (r))){
+            return true;
+        }
+        else if(x <= 0 && y >= 0 && y <= (x+(r/2)) && x >= (-r/2) && y <= r){
+            return true;
+        }
+        else return x >= 0 && y <= 0 && r >= Math.sqrt(y * y + x * x);
     }
 }
 
