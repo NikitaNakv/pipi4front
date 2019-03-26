@@ -1,25 +1,61 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import belle from 'belle';
+import { withRouter } from 'react-router-dom'
 
 class App extends Component {
-  render() {
+    constructor(props){
+        super(props);
+        this.state = {
+            username: "",
+            password: "",
+            isLogged: "false"
+        };
+    }
+
+
+
+
+    handleFormSubmit = formSubmitEvent => {
+        formSubmitEvent.preventDefault();
+
+        console.log("You have submitted username:", this.state.username);
+        console.log("You have submitted password:", this.state.password);
+    };
+
+
+
+    render() {
+        const BButton = withRouter(({ history }) => (
+            <belle.Button
+                type='submit'
+                onClick={() => { history.push('/main') }}
+            >
+                Sign in
+            </belle.Button>
+        ));
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+          <div id="header">
+              <p>Наквасин Н. и Травин Д. </p>
+              <p>группа 3211</p>
+              <p>Вариант 21142</p>
+          </div>
+          <header className="App-header">
+              <img src={logo} className="App-logo" alt="logo" />
+          </header>
+          <div>
+              <form onSubmit={this.handleFormSubmit}>
+                  <belle.TextInput onUpdate={(username) => this.setState({username})}
+                                   placeholder="username"
+                                   value={this.state.username.value}/>
+                  <belle.TextInput onUpdate={(password) => this.setState({password})}
+                                   placeholder="password"
+                                   value={this.state.password.value}/>
+                  <BButton/>
+              </form>
+          </div>
       </div>
     );
   }

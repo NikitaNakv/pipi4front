@@ -1,3 +1,49 @@
+#header {
+  background-color: #282c34;
+  font-family :  fantasy, arial, verdana, sans-serif ;
+  font-size : 20px;
+  color: rgb(118, 205, 255);
+  text-align: right;
+}
+
+div p{
+  margin: 0;
+  padding: 0;
+}
+
+canvas{
+  margin: 10px;
+}
+
+.App-header *{
+  margin: 5px;
+
+}
+
+#XLabel{
+  margin-left: 15px;
+}
+
+#RLabel{
+  margin-left: 35px;
+}
+
+.Data *{
+  border: 2px solid white;
+  text-align: center;
+}
+
+.Main-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
 .App {
   text-align: center;
 }
@@ -30,4 +76,55 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.slideContainer {
+  width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 25px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #4CAF50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #4CAF50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.Table {
+  border-spacing: 0px;
+  background: #fff;
+  box-shadow: 0 1px 0 0 rgba(22, 29, 37, 0.05);
+}
+
+.Cell {
+  border: 1px solid #f4f6f8;
+  padding: 4px;
+  text-align: left;
 }
