@@ -5,15 +5,18 @@ export default class Client{
             let request = new XMLHttpRequest();
             let body = 'name=' + encodeURIComponent(name) +
                 '&password=' + encodeURIComponent(password);
-            request.open("POST", "http://localhost:8080/pipi4/pip/rest/login");
-            request.setRequestHeader('Content-Type', 'application/json');
-            let parsed = JSON.parse(body);
-            request.onreadystatechange = () => {
-                let raw = request.responseText;
-                let objectified = JSON.parse(raw);
-                resolve(objectified);
-            };
-            request.send(parsed);
+            try {
+                request.open("POST", "http://localhost:8080/pipi4/pip/rest/login");
+                request.setRequestHeader('Content-Type', 'application/json');
+                let parsed = JSON.parse(body);
+                request.onreadystatechange = () => {
+                    let raw = request.responseText;
+                    let objectified = JSON.parse(raw);
+                    resolve(objectified);
+                };
+                request.send(parsed);
+            }catch (e) {
+            }
         });
         return result;
     }

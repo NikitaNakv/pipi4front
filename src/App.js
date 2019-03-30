@@ -24,17 +24,17 @@ class App extends Component {
 
         console.log("You have submitted username:", this.state.username);
         console.log("You have submitted password:", this.state.password);
+        console.log("You have submitted isLogged:", this.state.isLogged);
 
-        this.client.login(this.state.username,this.state.password).then();
+        this.client.login(this.state.username,this.state.password).then(bool => this.setState({isLogged:bool}));
     };
 
 
 
     render() {
-        const BButton = withRouter(({ history }) => (
+        const BButton = withRouter(() => (
             <belle.Button
                 type='submit'
-                onClick={() => { history.push('/main') }}
             >
                 Sign in
             </belle.Button>
