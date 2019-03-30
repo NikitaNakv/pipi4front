@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import belle from 'belle';
 import { withRouter } from 'react-router-dom'
+import Client from './Client'
 
 class App extends Component {
     constructor(props){
@@ -12,6 +13,7 @@ class App extends Component {
             password: "",
             isLogged: "false"
         };
+        this.client = new Client();
     }
 
 
@@ -22,6 +24,8 @@ class App extends Component {
 
         console.log("You have submitted username:", this.state.username);
         console.log("You have submitted password:", this.state.password);
+
+        this.client.login(this.state.username,this.state.password).then();
     };
 
 
@@ -38,7 +42,7 @@ class App extends Component {
     return (
       <div className="App">
           <div id="header">
-              <p>Наквасин Н. и Травин Д. </p>
+              <p>Наквасин Н. и Трав<button hidden="hidden">denis</button>ин Д. </p>
               <p>группа 3211</p>
               <p>Вариант 21142</p>
           </div>

@@ -13,7 +13,9 @@ class CanvasComponent extends Component {
     }
 
     componentWillReceiveProps(nextProps,nextState){
-        this.onChangeCanvasR(nextProps.r);
+        if(nextProps.r!==this.props.r) {
+            this.onChangeCanvasR(nextProps.r);
+        }
     }
 
     onChangeCanvasR(newR){
