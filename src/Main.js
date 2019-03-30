@@ -16,32 +16,10 @@ class Main extends Component {
             dynamicResult: true,
             data:
                 [
-                    {
-                        "X": 1,
-                        "Y": 2,
-                        "R": 3,
-                        "result": true
-                    },
-                    {
-                        "X": 1,
-                        "Y": 2,
-                        "R": 3,
-                        "result": true
-                    },
-                    {
-                        "X": 1,
-                        "Y": 2,
-                        "R": 3,
-                        "result": true
-                    }
                 ]
         };
     }
 
-
-    updateCanvas(canvasR) {
-        Canvas.updateState({canvasR})
-    }
 
     handleOptionChangeForX = changeEvent => {
         this.setState({
@@ -50,13 +28,18 @@ class Main extends Component {
         this.updateDynamicResult();
     };
     handleOptionChangeForR = changeEvent => {
-        this.setState({
-            selectedOptionForR: changeEvent.target.value
-        });
-        this.updateDynamicResult();
-        this.updateCanvas(changeEvent.target.value);
+        if (changeEvent.target.value > 0){
+            this.setState({
+                selectedOptionForR: changeEvent.target.value
+            });
+            this.updateDynamicResult();
+
+
+        }else
+            alert("R cannot be negative or 0")
 
     };
+
     handleOptionChangeForY = changeEvent => {
         this.setState({
             selectedOptionForY: changeEvent.target.value
@@ -101,7 +84,6 @@ class Main extends Component {
                 ]});
     };
 
-
     render() {
         const BButton = withRouter(({ history }) => (
             <belle.Button
@@ -114,7 +96,7 @@ class Main extends Component {
         return (
             <div>
                 <div className="Main">
-                    <Canvas/>
+                    <Canvas r={this.state.selectedOptionForR}/>
                     <header className="Main-header">
                         <form onSubmit={this.handleFormSubmit}>
                             <div className="labels">

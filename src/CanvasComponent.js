@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 
 
-function updateState(canvasR){
-    this.setState({canvasR})
-    console.log("You have submitted canvasR:", this.state.selectedOptionForR)
-}
-
 class CanvasComponent extends Component {
 
     constructor(props){
@@ -15,16 +10,37 @@ class CanvasComponent extends Component {
             width : 300,
             height : 300
         };
-        updateState = updateState.bind(this);
     }
 
+    componentWillReceiveProps(nextProps,nextState){
+        this.onChangeCanvasR(nextProps.r);
+    }
 
+    onChangeCanvasR(newR){
+        this.setState({
+            canvasR : newR
+        });
+        this.clearCanvas();
+        this.updateCanvas();
+        this.forceUpdate();
+    }
 
     componentDidMount() {
         this.updateCanvas();
     }
 
-    handleClick() {
+
+    handleClick(){
+        alert("canvas");
+    }
+
+    clearCanvas(){
+        let canvas = document.getElementById('canvas'),
+            ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    /*handleClick() {
         let canvas = document.getElementById('canvas');
         let br = canvas.getBoundingClientRect();
         let left = br.left;
@@ -44,7 +60,7 @@ class CanvasComponent extends Component {
 
             document.getElementById("submitForm").click();
         }
-    }
+    }*/
 
 
     drawPoint(x,y,r){
@@ -177,7 +193,7 @@ class CanvasComponent extends Component {
     }
     render() {
         return (
-            <canvas ref="canvas" onClick={ this.props.updateParent } width={300} height={300}/>
+            <canvas id="canvas" ref="canvas"  onClick={this.handleClick.bind(this)} width={300} height={300}/>
         );
     }
 
